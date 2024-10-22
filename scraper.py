@@ -55,7 +55,7 @@ def scrape_spell(url):
         action_type = "action"
     elif casting_time == "1 reaction":
         action_type = "reaction"
-    elif casting_time == "1 Bonus Action":
+    elif casting_time == "1 bonus action":
         action_type = "bonus action"
     else:
         action_type = casting_time
@@ -63,6 +63,7 @@ def scrape_spell(url):
     markdown = f"""---
 type: 
 - spell
+casting time:
 - {action_type}
 known: 
 level: {level}

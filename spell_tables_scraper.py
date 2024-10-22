@@ -4,6 +4,8 @@ import os
 import sys
 import scraper
 
+OUTPUT_FOLDER = None
+
 def scrape_table_and_spells(base_url):
     response = requests.get(base_url)
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -14,8 +16,15 @@ def scrape_table_and_spells(base_url):
     
     
     for i, table in enumerate(tables):
-        print(f"Table Nr {i}")
-        output_folder = os.path.join(os.path.expanduser("~"), f"Documents\Jarson MD\Zeno\_Assets\wikidot_scrapes\spells\level_{i}")
+        print(f"------Table Nr {i}-----\n")
+        if not OUTPUT_FOLDER:
+            output_folder = os.path.join(os.path.expanduser("~"), f"Desktop\wikidot_scrapes\spells\level_{i}")
+        else:
+            output_folder = os.path.join(OUTPUT_FOLDER, f"spells\level_{i}")
+
+
+
+
         os.makedirs(output_folder, exist_ok=True)
 
         for row in table.find_all('tr')[1:]:  # Skip header row
